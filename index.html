@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="style.css">
 <script src = "savePlaylist.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script> -->
 <!-- <body onload="doit()"> -->
 <body>
 <header>
@@ -298,7 +298,7 @@ function getTagsAndImages ()
 	$('#metadata').empty()
 	//document.getElementById("SpotifyWidget").style.visibility = "hidden"
 	//document.getElementById("SpotifySave").style.display = "none"
-	$("#status").text("Searching Musixmatch db for songs with those words")
+	$("#status").text("Searching Musixmatch for this song")
 	document.getElementById("progress").style.display = "inline-block"
 
 	getJSON(seed_queryURI).then(function(response){
@@ -306,16 +306,36 @@ function getTagsAndImages ()
 		//window.resp = response
 		return getMxmAndSpotifyIdFromMacro(response).then(function(track_ids){
 		 	console.log(track_ids)
-		 	url = echonest_base + echonest_api_key + '&id=spotify-WW:track:'+track_ids[1] + '&bucket=audio_summary' + '&format=jsonp&callback=?'//'/tags.images?trackID=' + track_ids[0] + '&format=jsonp&callback=?'
+		 	if(track_ids[1] != '')
+		 	{
+		 		url = echonest_base + echonest_api_key + '&id=spotify-WW:track:'+track_ids[1] + '&bucket=audio_summary' + '&format=jsonp&callback=?'//'/tags.images?trackID=' + track_ids[0] + '&format=jsonp&callback=?'
+		 	}
+		 	else
+		 	{
+		 		return Promise.reject()
+		 	}
 		 	url = encodeURI(url)
-		 	$("#status").text("Searching for images (please try again if stuck here)")
+		 	$("#status").text("Searching echonest analysis")
 		 	console.log(url)
 		 	return getJSON(url).then(function(echonest_response){
 		 		$("#status").text("Done")
 		 		console.log(echonest_response)
 		 		document.getElementById("progress").style.display = "none"
 		 		document.getElementById("metadata").style.display = "inline"
-		 		document.getElementById("metadata").innerHTML += JSON.stringify(echonest_response.response.track.audio_summary.instrumentalness,null,' ') //'<pre><code>' + JSON.stringify(echonest_response.response.track,null,' ') + '</pre></code>'//'<pre><code>' + echonest_response + '</pre></code>'
+		 		try:
+		 		{
+		 			if (Number(echonest_response.response.track.audio_summary.instrumentalness) >= 0.9) {document.getElementById("metadata").innerHTML += 'Instrumental'}
+		 			else () {document.getElementById("metadata").innerHTML += 'Not instrumental'}
+		 		}
+
+		 		catch:
+		 		{
+		 			document.getElementById("metadata").innerHTML += "Echonest doesn't have this data yet"
+		 		}
+		 		// if (Number(echonest_response.response.track.audio_summary.instrumentalness) <= 0.5) {document.getElementById("metadata").innerHTML += 'Not instrumental'}	
+
+
+		 		// document.getElementById("metadata").innerHTML += 'instrumentalness = ' + JSON.stringify(echonest_response.response.track.audio_summary.instrumentalness,null,' ') //'<pre><code>' + JSON.stringify(echonest_response.response.track,null,' ') + '</pre></code>'//'<pre><code>' + echonest_response + '</pre></code>'
 
 		 		if(track_ids[1] != "")
 		 		{
