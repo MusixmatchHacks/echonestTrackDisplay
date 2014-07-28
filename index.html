@@ -321,6 +321,9 @@ function getTagsAndImages ()
 		 	}
 		 	else
 		 	{
+		 		$("#status").text("Corresponding spotify id not found in musixmatch db")
+		 		document.getElementById("progress").style.display = "none"
+
 		 		return Promise.reject()
 		 	}
 		 	url = encodeURI(url)
@@ -333,7 +336,7 @@ function getTagsAndImages ()
 		 		document.getElementById("metadata").style.display = "inline"
 		 		try
 		 		{
-		 			if (Number(echonest_response.response.track.audio_summary.instrumentalness) >= 0.9) {document.getElementById("metadata").innerHTML += 'Instrumental'}
+		 			if (Number(echonest_response.response.track.audio_summary.instrumentalness) >= 0.8) {document.getElementById("metadata").innerHTML += 'Instrumental'}
 		 			else {document.getElementById("metadata").innerHTML += 'Not instrumental'}
 		 		}
 
