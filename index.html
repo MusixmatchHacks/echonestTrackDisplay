@@ -317,7 +317,8 @@ function getTagsAndImages ()
 		 	console.log(track_ids)
 		 	if(track_ids[1] != '')
 		 	{
-		 		url = echonest_base + echonest_api_key + '&id=spotify-WW:track:'+track_ids[1] + '&bucket=audio_summary' + '&format=jsonp&callback=?'//'/tags.images?trackID=' + track_ids[0] + '&format=jsonp&callback=?'
+		 		// url = echonest_base + echonest_api_key + '&id=spotify-WW:track:'+track_ids[1] + '&bucket=audio_summary' + '&format=jsonp&callback=?'//'/tags.images?trackID=' + track_ids[0] + '&format=jsonp&callback=?'
+		 		url = echonest_base + echonest_api_key + '&id=musixmatch-WW:track:'+track_ids[0] + '&bucket=audio_summary' + '&format=jsonp&callback=?'
 		 	}
 		 	else
 		 	{
