@@ -364,7 +364,12 @@ function getTagsAndImages ()
 		 		}
 		 	})
 		 	
-		 }, function(error){console.log('123')})
+		 }, function(error){
+		 	//console.log('123')
+		 	$("#status").text("Musixmatch macro method 404")
+		 	document.getElementById("progress").style.display = "none"
+
+		 })
 		// 	url = tagAPI_base + '/tags.images?trackID=' + track_ids[0] + '&format=jsonp&callback=?'
 		// 	url = encodeURI(url)
 		// 	$("#status").text("Searching for images (please try again if stuck here)")
