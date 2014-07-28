@@ -322,13 +322,13 @@ function getTagsAndImages ()
 		 		console.log(echonest_response)
 		 		document.getElementById("progress").style.display = "none"
 		 		document.getElementById("metadata").style.display = "inline"
-		 		try:
+		 		try
 		 		{
 		 			if (Number(echonest_response.response.track.audio_summary.instrumentalness) >= 0.9) {document.getElementById("metadata").innerHTML += 'Instrumental'}
 		 			else () {document.getElementById("metadata").innerHTML += 'Not instrumental'}
 		 		}
 
-		 		catch:
+		 		catch
 		 		{
 		 			document.getElementById("metadata").innerHTML += "Echonest doesn't have this data yet"
 		 		}
