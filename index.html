@@ -337,7 +337,7 @@ function getTagsAndImages ()
 		 		try
 		 		{
 		 			if (Number(echonest_response.response.track.audio_summary.instrumentalness) >= 0.8) {document.getElementById("metadata").innerHTML += 'Instrumental'}
-		 			else {document.getElementById("metadata").innerHTML += 'Not instrumental'}
+		 			else {document.getElementById("metadata").innerHTML += 'Not instrumental - has human voices'}
 		 		}
 
 		 		catch (error)
