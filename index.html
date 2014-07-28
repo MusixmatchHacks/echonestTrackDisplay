@@ -338,11 +338,13 @@ function getTagsAndImages ()
 		 		{
 		 			if (Number(echonest_response.response.track.audio_summary.instrumentalness) >= 0.8) {document.getElementById("metadata").innerHTML += 'Instrumental'}
 		 			else {document.getElementById("metadata").innerHTML += 'Not instrumental - has human voices'}
+		 			$("#status").text("")
 		 		}
 
 		 		catch (error)
 		 		{
 		 			document.getElementById("metadata").innerHTML += "Echonest doesn't have this data yet"
+		 			$("#status").text("")
 		 		}
 		 		// if (Number(echonest_response.response.track.audio_summary.instrumentalness) <= 0.5) {document.getElementById("metadata").innerHTML += 'Not instrumental'}	
 
